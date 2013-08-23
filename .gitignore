@@ -1,3 +1,6 @@
 ext/
 test-results.xml
 coverage/
+build/
+.project
+.settings/
