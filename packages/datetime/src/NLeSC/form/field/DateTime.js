@@ -5,7 +5,7 @@
  * @author <a href="mailto:s.verhoeven@esciencecenter.nl">Stefan Verhoeven</a>
  * @see http://www.sencha.com/forum/showthread.php?134345-Ext.ux.form.field.DateTime
  */
-Ext.define('NLeSC.ee.form.field.DateTime', {
+Ext.define('NLeSC.form.field.DateTime', {
     extend : 'Ext.form.FieldContainer',
     mixins : {
         field : 'Ext.form.field.Field'
