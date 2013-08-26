@@ -1,9 +1,33 @@
 /**
- * @author atian25 (http://www.sencha.com/forum/member.php?51682-atian25)
- * @author ontho (http://www.sencha.com/forum/member.php?285806-ontho)
- * @author jakob.ketterl (http://www.sencha.com/forum/member.php?25102-jakob.ketterl)
- * @author <a href="mailto:s.verhoeven@esciencecenter.nl">Stefan Verhoeven</a>
- * @see http://www.sencha.com/forum/showthread.php?134345-Ext.ux.form.field.DateTime
+ * Provides a datetime input field with a date picker and time dropdown.
+ * The field is automiticly validated.
+ *
+ * Derived from [Sencha Forum](http://www.sencha.com/forum/showthread.php?134345-Ext.ux.form.field.DateTime)
+ *
+ * Example usage:
+ *
+ *     @example
+ *     Ext.create('Ext.form.Panel', {
+ *         title: 'Time Range',
+ *         width: 300,
+ *         bodyPadding: 10,
+ *         renderTo: Ext.getBody(),
+ *         items: [{
+ *             xtype: 'xdatetime',
+ *             name: 'in',
+ *             fieldLabel: 'From',
+ *             value: '2013-01-01T12:00:00Z',
+ *             maxValue: '2014-01-01T12:00:00Z',
+ *             anchor: '100%'
+ *         }, {
+ *             xtype: 'xdatetime',
+ *             name: 'out',
+ *             fieldLabel: 'To',
+ *             minValue: '2013-01-01T12:00:00Z',
+ *             value: '2014-01-01T12:00:00Z',
+ *             anchor: '100%'
+ *        }]
+ *     });
  */
 Ext.define('NLeSC.ee.form.field.DateTime', {
     extend : 'Ext.form.FieldContainer',
@@ -13,7 +37,7 @@ Ext.define('NLeSC.ee.form.field.DateTime', {
     requires: [
         'Ext.form.field.VTypes',
         'Ext.form.field.Date',
-        'Ext.form.field.Time',
+        'Ext.form.field.Time'
     ],
     alias : 'widget.xdatetime',
 
@@ -150,7 +174,7 @@ Ext.define('NLeSC.ee.form.field.DateTime', {
                  */
                 return true;
             },
-            daterangeText : 'Start date must be less than end date',
+            daterangeText : 'Start date must be less than end date'
         });
 
         me.callParent();
@@ -196,7 +220,7 @@ Ext.define('NLeSC.ee.form.field.DateTime', {
         if (date) {
             if (time) {
                 var format = this.getFormat();
-                value = Ext.Date.parse(date + ' ' + time,
+                value = Ext.Date.parse(date + 'T' + time,
                         format);
             } else {
                 value = this.dateField.getValue();
@@ -263,7 +287,7 @@ Ext.define('NLeSC.ee.form.field.DateTime', {
                         || vtypes[vtype + 'Text']);
             }
         }
-        return errors
+        return errors;
     },
     listeners: {
         afterRender: function() {
