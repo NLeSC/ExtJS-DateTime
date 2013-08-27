@@ -270,7 +270,7 @@ Ext.define('NLeSC.form.field.DateTime', {
 
     getFormat : function() {
         return (this.dateField.submitFormat || this.dateField.format)
-                + " "
+                + "T"
                 + (this.timeField.submitFormat || this.timeField.format);
     },
 

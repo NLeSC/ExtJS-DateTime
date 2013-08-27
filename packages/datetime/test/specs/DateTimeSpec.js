@@ -129,4 +129,24 @@ describe('NLeSC.form.field.DateTime', function() {
 
         expect(instance.dateField.setMinValue).toHaveBeenCalledWith(dt);
     });
+
+    describe('getFormat', function() {
+        it('should use datefield.format+"T"+timefield.format', function() {
+            instance.dateField = {format: 'Y-m-d'};
+            instance.timeField = {format: 'H:i:s'};
+
+            var value = instance.getFormat();
+
+            expect(value).toEqual('Y-m-dTH:i:s');
+        });
+
+        it('should use datefield.submitFormat+"T"+timefield.submitFormat', function() {
+           instance.dateField = {submitFormat: 'Y-m-d'};
+           instance.timeField = {submitFormat: 'H:i:s'};
+
+           var value = instance.getFormat();
+
+           expect(value).toEqual('Y-m-dTH:i:s');
+       });
+    });
 });
