@@ -36,12 +36,15 @@ module.exports = function(config) {
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
     reporters: ['dots', 'junit', 'coverage'],
 
+    junitReporter: {
+        outputFile: 'reports/TEST-results.xml'
+    },
     coverageReporter: {
         dir: 'coverage/',
         reporters: [{
-            type: 'lcov'
+            type: 'lcov' // for viewing html pages and SonarQube
         }, {
-            type: 'cobertura'
+            type: 'cobertura' // for use in Jenkins
         }]
     },
 
