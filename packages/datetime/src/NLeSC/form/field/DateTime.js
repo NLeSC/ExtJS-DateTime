@@ -202,7 +202,7 @@ Ext.define('NLeSC.form.field.DateTime', {
         this.inputEl = {
             dom : {},
             swallowEvent: Ext.emptyFn,
-            setStyle: Ext.emptyFn,
+            setStyle: Ext.emptyFn
         };
 
         me.initField();
