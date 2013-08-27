@@ -24,23 +24,27 @@
  *     @example
  *     Ext.create('Ext.form.Panel', {
  *         title: 'Time Range',
- *         width: 300,
+ *         width: 340,
  *         bodyPadding: 10,
+ *         height: 400,
  *         renderTo: Ext.getBody(),
+ *         fieldDefaults: {
+ *             labelAlign: 'left',
+ *             labelWidth: 40,
+ *             anchor: '100%'
+ *         },
  *         items: [{
  *             xtype: 'xdatetime',
- *             name: 'in',
+ *             name: 'from',
  *             fieldLabel: 'From',
  *             value: '2013-01-01T12:00:00Z',
- *             maxValue: '2014-01-01T12:00:00Z',
- *             anchor: '100%'
+ *             maxValue: '2014-01-01T12:00:00Z'
  *         }, {
  *             xtype: 'xdatetime',
- *             name: 'out',
+ *             name: 'to',
  *             fieldLabel: 'To',
  *             minValue: '2013-01-01T12:00:00Z',
- *             value: '2014-01-01T12:00:00Z',
- *             anchor: '100%'
+ *             value: '2014-01-01T12:00:00Z'
  *        }]
  *     });
  */
@@ -197,8 +201,8 @@ Ext.define('NLeSC.form.field.DateTime', {
         // this dummy is necessary because Ext.Editor will not check whether an inputEl is present or not
         this.inputEl = {
             dom : {},
-            swallowEvent : function() {
-            }
+            swallowEvent: Ext.emptyFn,
+            setStyle: Ext.emptyFn,
         };
 
         me.initField();

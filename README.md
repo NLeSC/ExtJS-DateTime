@@ -20,6 +20,13 @@ Installation and usage
 3. Use component in your application.
 4. `sencha app refresh` do download package.
 
+Documentation
+-------------
+
+Documentation can be generated with `ant docs`.
+To make inline examples to work a copy of the ExtJS SDK as `docs/extjs-build`.
+Place the docs folder online and open `docs/index.html` in a webbrowser.
+
 Copyrights & Disclaimers
 ------------------------
 
