@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-describe('NLeSC.ee.form.field.DateTime', function() {
+describe('NLeSC.form.field.DateTime', function() {
     'use strict';
 
     var instance = null, esj = ExtSpec.Jasmine;
@@ -24,7 +24,7 @@ describe('NLeSC.ee.form.field.DateTime', function() {
 
     beforeEach(function() {
         this.addMatchers(esj.Matchers);
-        instance = ExtSpec.create('NLeSC.ee.form.field.DateTime', function() {
+        instance = ExtSpec.create('NLeSC.form.field.DateTime', function() {
             this.callParent = jasmine.createSpy('callParent');
             ExtSpec.Jasmine.createConfigSpies(this);
         });

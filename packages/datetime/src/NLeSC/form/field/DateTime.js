@@ -44,7 +44,7 @@
  *        }]
  *     });
  */
-Ext.define('NLeSC.ee.form.field.DateTime', {
+Ext.define('NLeSC.form.field.DateTime', {
     extend : 'Ext.form.FieldContainer',
     mixins : {
         field : 'Ext.form.field.Field'
