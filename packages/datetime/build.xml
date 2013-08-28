@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="datetime" default=".help">
-    <!--
+	<!--
     The build-impl.xml file imported here contains the guts of the build process. It is
     a great idea to read that file to understand how the process works, but it is best to
     limit your changes to this file.
     -->
-    <import file="${basedir}/.sencha/package/build-impl.xml"/>
+	<import file="${basedir}/.sencha/package/build-impl.xml" />
 
-    <!--
+	<!--
     The following targets can be provided to inject logic before and/or after key steps
     of the build process:
 
@@ -27,11 +27,33 @@
 
             <target name="-before-init"/>
             <target name="-after-init"/>
-        
+
         The "build" target performs the call to Sencha Cmd to build the application.
 
             <target name="-before-build"/>
             <target name="-after-build"/>
     -->
-
+	<target name="-before-pkg" description="Sencha Cmd package extension point">
+		<antcall target="test" />
+		<antcall target="docs" />
+	</target>
+	<target name="docs" description="Generates JSDuck API documentation">
+		<echo message="Generating API documentation..." />
+		<exec executable="jsduck" timeout="20000" failonerror="true" />
+	</target>
+	<target name="test" description="Tests the build against PhantomJS using Karma">
+		<exec executable="karma" failonerror="true">
+			<arg line="start" />
+		</exec>
+		<antcall target="lcovmerge" />
+	</target>
+	<target name="lcovmerge" description="Merge coverage from all browsers">
+		<!-- Replace phantomjs with loop of dirs in coverage/ -->
+	    <property name="phantomjs" value="PhantomJS 1.9.1 (Linux)" />
+		<exec executable="lcov" failonerror="false">
+			<arg line="-a 'coverage/${phantomjs}/lcov.info' -o coverage/coverage.lcov" />
+		</exec>
+		<!-- For SonarQube SF tags must be relative to sonar.sources -->
+		<replace file="coverage/coverage.lcov" token="./src/" value="" />
+	</target>
 </project>

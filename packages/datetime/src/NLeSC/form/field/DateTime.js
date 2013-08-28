@@ -1,9 +1,52 @@
+/*
+ * Copyright 2013 Netherlands eScience Center
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /**
- * @author atian25 (http://www.sencha.com/forum/member.php?51682-atian25)
- * @author ontho (http://www.sencha.com/forum/member.php?285806-ontho)
- * @author jakob.ketterl (http://www.sencha.com/forum/member.php?25102-jakob.ketterl)
- * @author <a href="mailto:s.verhoeven@esciencecenter.nl">Stefan Verhoeven</a>
- * @see http://www.sencha.com/forum/showthread.php?134345-Ext.ux.form.field.DateTime
+ * Provides a datetime input field with a date picker and time dropdown.
+ * The field is automiticly validated.
+ *
+ * Derived from [Sencha Forum](http://www.sencha.com/forum/showthread.php?134345-Ext.ux.form.field.DateTime)
+ *
+ * Example usage:
+ *
+ *     @example
+ *     Ext.create('Ext.form.Panel', {
+ *         title: 'Time Range',
+ *         width: 340,
+ *         bodyPadding: 10,
+ *         height: 400,
+ *         renderTo: Ext.getBody(),
+ *         fieldDefaults: {
+ *             labelAlign: 'left',
+ *             labelWidth: 40,
+ *             anchor: '100%'
+ *         },
+ *         items: [{
+ *             xtype: 'xdatetime',
+ *             name: 'from',
+ *             fieldLabel: 'From',
+ *             value: '2013-01-01T12:00:00Z',
+ *             maxValue: '2014-01-01T12:00:00Z'
+ *         }, {
+ *             xtype: 'xdatetime',
+ *             name: 'to',
+ *             fieldLabel: 'To',
+ *             minValue: '2013-01-01T12:00:00Z',
+ *             value: '2014-01-01T12:00:00Z'
+ *        }]
+ *     });
  */
 Ext.define('NLeSC.form.field.DateTime', {
     extend : 'Ext.form.FieldContainer',
@@ -13,7 +56,7 @@ Ext.define('NLeSC.form.field.DateTime', {
     requires: [
         'Ext.form.field.VTypes',
         'Ext.form.field.Date',
-        'Ext.form.field.Time',
+        'Ext.form.field.Time'
     ],
     alias : 'widget.xdatetime',
 
@@ -150,7 +193,7 @@ Ext.define('NLeSC.form.field.DateTime', {
                  */
                 return true;
             },
-            daterangeText : 'Start date must be less than end date',
+            daterangeText : 'Start date must be less than end date'
         });
 
         me.callParent();
@@ -158,8 +201,8 @@ Ext.define('NLeSC.form.field.DateTime', {
         // this dummy is necessary because Ext.Editor will not check whether an inputEl is present or not
         this.inputEl = {
             dom : {},
-            swallowEvent : function() {
-            }
+            swallowEvent: Ext.emptyFn,
+            setStyle: Ext.emptyFn
         };
 
         me.initField();
@@ -196,7 +239,7 @@ Ext.define('NLeSC.form.field.DateTime', {
         if (date) {
             if (time) {
                 var format = this.getFormat();
-                value = Ext.Date.parse(date + ' ' + time,
+                value = Ext.Date.parse(date + 'T' + time,
                         format);
             } else {
                 value = this.dateField.getValue();
@@ -227,7 +270,7 @@ Ext.define('NLeSC.form.field.DateTime', {
 
     getFormat : function() {
         return (this.dateField.submitFormat || this.dateField.format)
-                + " "
+                + "T"
                 + (this.timeField.submitFormat || this.timeField.format);
     },
 
@@ -263,7 +306,7 @@ Ext.define('NLeSC.form.field.DateTime', {
                         || vtypes[vtype + 'Text']);
             }
         }
-        return errors
+        return errors;
     },
     listeners: {
         afterRender: function() {

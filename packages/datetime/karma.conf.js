@@ -14,34 +14,37 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'lib/ExtSpec-*/ExtSpec.js',
-      '../src/**/*.js',
-      'specs/*Spec.js'
+      'test/lib/ExtSpec-*/ExtSpec.js',
+      'src/**/*.js',
+      'test/specs/*Spec.js'
     ],
 
     preprocessors: {
         // source files, that you wanna generate coverage for
         // do not include tests or libraries
         // (these files will be instrumented by Istanbul)
-        '../src/**/*.js': ['coverage']
+        'src/**/*.js': ['coverage']
     },
-      
+
     // list of files to exclude
     exclude: [
-      
+
     ],
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
     reporters: ['dots', 'junit', 'coverage'],
-    
+
+    junitReporter: {
+        outputFile: 'reports/TEST-results.xml'
+    },
     coverageReporter: {
         dir: 'coverage/',
         reporters: [{
-            type: 'lcov'
+            type: 'lcov' // for viewing html pages and SonarQube
         }, {
-            type: 'cobertura'
+            type: 'cobertura' // for use in Jenkins
         }]
     },
 
