@@ -4,7 +4,7 @@
     "creator": "NLeSC",
     "summary": "Date time form field",
     "detailedDescription": "Combination of Date and time field",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "compatVersion": "1.0.0",
     "format": "1",
     "local": true,

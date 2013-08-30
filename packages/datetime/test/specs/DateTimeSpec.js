@@ -149,4 +149,72 @@ describe('NLeSC.form.field.DateTime', function() {
            expect(value).toEqual('Y-m-dTH:i:s');
        });
     });
+
+    describe('getErrors', function() {
+        var dateErrors = [];
+        var timeErrors = [];
+
+        beforeEach(function() {
+            dateErrors = [];
+            timeErrors = [];
+            instance.vtype = 'daterange';
+            instance.dateField = {
+                getErrors: function() {
+                    return dateErrors;
+                }
+            };
+            instance.timeField = {
+                getErrors: function() {
+                    return timeErrors;
+                }
+            };
+            instance.getValue = function() {
+                return '2013-08-26T12:34:57Z';
+            };
+            Ext.form = {
+                field: {
+                    VTypes: {
+                        daterange : function(val, field) { return true;},
+                        daterangeText : 'Start date must be less than end date'
+                    }
+                }
+            };
+        });
+
+        it('should return no errors without a vtype', function() {
+            instance.vtype = null;
+            var errors = instance.getErrors();
+
+            expect(errors).toEqual([]);
+        });
+
+        it('should return date and time errors', function() {
+            dateErrors = ['Invalid date format'];
+            timeErrors = ['Invalid time format'];
+
+            var errors = instance.getErrors();
+
+            expect(errors).toEqual([
+                'Invalid date format',
+                'Invalid time format'
+            ]);
+        });
+
+
+        it('should return no errors with a vtype', function() {
+            spyOn(Ext.form.field.VTypes, 'daterange').andReturn(true);
+
+            var errors = instance.getErrors();
+
+            expect(errors).toEqual([]);
+        });
+
+        it('should return vtype error', function() {
+            spyOn(Ext.form.field.VTypes, 'daterange').andReturn(false);
+
+            var errors = instance.getErrors();
+
+            expect(errors).toEqual(['Start date must be less than end date']);
+        });
+    });
 });

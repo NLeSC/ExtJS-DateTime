@@ -199,11 +199,7 @@ Ext.define('NLeSC.form.field.DateTime', {
         me.callParent();
 
         // this dummy is necessary because Ext.Editor will not check whether an inputEl is present or not
-        this.inputEl = {
-            dom : {},
-            swallowEvent: Ext.emptyFn,
-            setStyle: Ext.emptyFn
-        };
+        this.inputEl = this.getEl();
 
         me.initField();
     },
@@ -297,8 +293,8 @@ Ext.define('NLeSC.form.field.DateTime', {
         var vtypes = Ext.form.field.VTypes;
         value = value || me.getValue();
 
-        errors.concat(this.dateField.getErrors());
-        errors.concat(this.timeField.getErrors());
+        errors = errors.concat(this.dateField.getErrors());
+        errors = errors.concat(this.timeField.getErrors());
 
         if (vtype) {
             if (!vtypes[vtype](value, me)) {
