@@ -198,13 +198,6 @@ Ext.define('NLeSC.form.field.DateTime', {
 
         me.callParent();
 
-        // this dummy is necessary because Ext.Editor will not check whether an inputEl is present or not
-        this.inputEl = {
-            dom : {},
-            swallowEvent: Ext.emptyFn,
-            setStyle: Ext.emptyFn
-        };
-
         me.initField();
     },
 
