@@ -59,14 +59,11 @@ Ext.define('NLeSC.form.field.DateTime', {
         'Ext.form.field.Time'
     ],
     alias : 'widget.xdatetime',
-
     //configurables
-
     combineErrors : false,
     msgTarget : 'under',
     layout : 'hbox',
     readOnly : false,
-
     /**
      * @cfg {String} dateFormat
      * The default is 'Y-m-d'
@@ -108,7 +105,6 @@ Ext.define('NLeSC.form.field.DateTime', {
      * @type Ext.form.field.Time
      */
     timeField : null,
-
     initComponent : function() {
         var me = this;
         me.items = me.items || [];
@@ -200,18 +196,15 @@ Ext.define('NLeSC.form.field.DateTime', {
 
         me.initField();
     },
-
     focus : function() {
         this.callParent();
         this.dateField.focus();
     },
-
     onItemFocus : function(item) {
         if (this.blurTask)
             this.blurTask.cancel();
         this.focussedItem = item;
     },
-
     onItemBlur : function(item) {
         var me = this;
         if (item != me.focussedItem)
@@ -223,7 +216,6 @@ Ext.define('NLeSC.form.field.DateTime', {
         me.syncValue();
         me.blurTask.delay(100);
     },
-
     getValue : function() {
         var value = null, date = this.dateField
                 .getSubmitValue(), time = this.timeField
@@ -240,7 +232,6 @@ Ext.define('NLeSC.form.field.DateTime', {
         }
         return value;
     },
-
     getSubmitValue : function() {
         var value = this.getValue();
         return value ? Ext.Date.format(value,
@@ -251,7 +242,6 @@ Ext.define('NLeSC.form.field.DateTime', {
         var me = this;
         me.mixins.field.setValue.call(me, me.getValue());
     },
-
     setValue : function(value) {
         if (Ext.isString(value)) {
             value = Ext.Date.parse(value, this.dateTimeFormat);
@@ -260,13 +250,11 @@ Ext.define('NLeSC.form.field.DateTime', {
         this.timeField.setValue(value);
         this.syncValue();
     },
-
     getFormat : function() {
         return (this.dateField.submitFormat || this.dateField.format)
                 + "T"
                 + (this.timeField.submitFormat || this.timeField.format);
     },
-
     // Bug? A field-mixin submits the data from getValue, not getSubmitValue
     getSubmitData : function() {
         var me = this, data = null;
@@ -300,11 +288,5 @@ Ext.define('NLeSC.form.field.DateTime', {
             }
         }
         return errors;
-    },
-    listeners: {
-        afterRender: function() {
-            // BUG WORKAROUND for Uncaught TypeError: Object #<Object> has no method 'setStyle'
-            this.inputEl.setStyle = function() {};
-        }
     }
 });

@@ -1,5 +1,7 @@
 {
     "--output": "docs",
     "--eg-iframe": "docs-src/eg-iframe.html",
+    "--examples" : "examples/examples.json",
+    "--examples-base-url" : "../examples/",
     "--": ["src"]
 }
