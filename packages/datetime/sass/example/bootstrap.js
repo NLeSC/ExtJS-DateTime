@@ -73,7 +73,8 @@ Ext.ClassManager.addNameAlternateMappings({
     "Ext.ux.StatusBar"
   ],
   "Ext.ux.statusbar.ValidationStatus": [],
-  "NLeSC.form.field.DateTime": []
+  "NLeSC.form.field.DateTime": [],
+  "NLeSC.form.field.DateTimeRange": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.BoxReorderer": [],
@@ -188,5 +189,8 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.statusbar.ValidationStatus": [],
   "NLeSC.form.field.DateTime": [
     "widget.xdatetime"
+  ],
+  "NLeSC.form.field.DateTimeRange": [
+    "widget.datetimerange"
   ]
 });
