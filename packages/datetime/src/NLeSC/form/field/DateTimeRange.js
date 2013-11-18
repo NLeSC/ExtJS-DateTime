@@ -17,6 +17,23 @@
  * Date time range.
  *
  * Combine 2 date time components which are each others max and min.
+ *
+ *     @example
+ *     Ext.create('Ext.form.Panel', {
+ *         title: 'Time Range',
+ *         width: 340,
+ *         bodyPadding: 10,
+ *         height: 400,
+ *         renderTo: Ext.getBody(),
+ *         fieldDefaults: {
+ *             labelAlign: 'left',
+ *             labelWidth: 40,
+ *             anchor: '100%'
+ *         },
+ *         items: [{
+ *             xtype: 'datetimerange'
+ *        }]
+ *     });
  */
 Ext.define('NLeSC.form.field.DateTimeRange', {
     extend: 'Ext.form.FieldContainer',
