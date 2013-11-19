@@ -46,11 +46,11 @@ Ext.define('NLeSC.form.field.DateTimeRange', {
     },
     items: [{
         fieldLabel: 'Start',
-        value: new Date(new Date-(1000*60*60*24*3)), // now - 3 days
+        value: new Date(new Date().setHours(0,0,0,0)-(1000*60*60*24*3)), // now - 3 days
         name: 'start'
     }, {
         fieldLabel: 'End',
-        value: new Date(), // now
+        value: new Date(new Date().setHours(0,0,0,0)), // date without time now
         name: 'end'
     }],
     getStartField: function() {
