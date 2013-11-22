@@ -31,7 +31,7 @@ Documentation
 -------------
 
 Documentation can be generated with `ant docs`.
-To make inline examples work, copy ExtJS SDK to `docs/extjs-build`.
+To make inline examples work, make a copy of the ExtJS SDK directory as `docs/extjs-build`.
 Place the docs folder online and open `docs/index.html` in a webbrowser.
 
 Copyrights & Disclaimers

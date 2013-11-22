@@ -1,0 +1,16 @@
+[ {
+    "title" : "DateTime",
+    "items" : [ {
+        "name" : "Forms",
+        "title" : "Forms",
+        "url" : "form.html",
+        "icon" : "form.png",
+        "desc" : "An example of DateTime components inside a form"
+    }, {
+        "name" : "Editable grid",
+        "title" : "Editable grid",
+        "url" : "grid.html",
+        "icon" : "grid.png",
+        "desc" : "An example of DateTime components inside a row editable grid"
+    } ]
+} ]
