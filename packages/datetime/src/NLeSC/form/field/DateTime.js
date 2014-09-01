@@ -226,15 +226,15 @@ Ext.define('NLeSC.form.field.DateTime', {
         	
         	return date;
         }
-        Ext.define('Ext.form.field.TimeUtc', {
-        	override: 'Ext.form.field.Time',
-        	initDate: '1/1/20080',
-            initDateFormat: 'j/n/YZ',
-        });
-        Ext.define('Ext.picker.TimeUtc', {
-        	override: 'Ext.picker.Time',
-        	normalizeDate: function(date) { return date;}
-        });
+//        Ext.define('NLeSC.form.field.TimeUtc', {
+//        	override: 'Ext.form.field.Time',
+//        	initDate: '1/1/20080',
+//            initDateFormat: 'j/n/YZ'
+//        });
+//        Ext.define('NLeSC.picker.TimeUtc', {
+//        	override: 'Ext.picker.Time',
+//        	normalizeDate: function(date) { return date;}
+//        });
     },
     focus : function() {
         this.callParent();
