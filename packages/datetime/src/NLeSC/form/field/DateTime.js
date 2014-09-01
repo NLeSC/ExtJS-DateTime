@@ -105,9 +105,20 @@ Ext.define('NLeSC.form.field.DateTime', {
      * @type Ext.form.field.Time
      */
     timeField : null,
+    /**
+     * @cfg {Boolean} utcFormat
+     * Forces date time to be represented in UTC instead of localized format. 
+     * 
+     * WATCH OUT! This will override functions in Ext.Date and Ext.picker.Time 
+     */
+    utcFormat: true,
     initComponent : function() {
         var me = this;
         me.items = me.items || [];
+        
+        if (this.utcFormat) {
+        	this.forceUtcFormat();
+        }
 
         me.dateField = Ext.create('Ext.form.field.Date', Ext
                 .apply({
@@ -195,6 +206,36 @@ Ext.define('NLeSC.form.field.DateTime', {
         me.callParent();
         me.initField();
     },
+    forceUtcFormat: function() {
+        Ext.Date.formatCodes['Y'] = "Ext.String.leftPad(this.getUTCFullYear(), 4, '0')";
+        Ext.Date.formatCodes['m'] = "Ext.String.leftPad(this.getUTCMonth() + 1, 2, '0')";
+        Ext.Date.formatCodes['d'] = "Ext.String.leftPad(this.getUTCDate(), 2, '0')";
+        Ext.Date.formatCodes['H'] = "Ext.String.leftPad(this.getUTCHours(), 2, '0')";
+        Ext.Date.formatCodes['i'] = "Ext.String.leftPad(this.getUTCMinutes(), 2, '0')";
+        Ext.Date.formatCodes['s'] = "Ext.String.leftPad(this.getUTCSeconds(), 2, '0')";
+        Ext.Date.formatCodes['c'] = "this.toISOString()";
+        Ext.Date.clearTime = function(date, clone) {
+        	if (clone) {
+                return Ext.Date.clearTime(Ext.Date.clone(date));
+            }
+        	
+        	date.setUTCHours(0);
+        	date.setUTCMinutes(0);
+        	date.setUTCSeconds(0);
+        	date.setUTCMilliseconds(0);
+        	
+        	return date;
+        }
+        Ext.define('Ext.form.field.TimeUtc', {
+        	override: 'Ext.form.field.Time',
+        	initDate: '1/1/20080',
+            initDateFormat: 'j/n/YZ',
+        });
+        Ext.define('Ext.picker.TimeUtc', {
+        	override: 'Ext.picker.Time',
+        	normalizeDate: function(date) { return date;}
+        });
+    },
     focus : function() {
         this.callParent();
         this.dateField.focus();
@@ -216,18 +257,13 @@ Ext.define('NLeSC.form.field.DateTime', {
         me.blurTask.delay(100);
     },
     getValue : function() {
-        var value = null, date = this.dateField
-                .getSubmitValue(), time = this.timeField
-                .getSubmitValue();
-
-        if (date) {
-            if (time) {
-                var format = this.getFormat();
-                value = Ext.Date.parse(date + 'T' + time,
-                        format);
-            } else {
-                value = this.dateField.getValue();
-            }
+        var value = this.dateField.getValue();
+        var time = this.timeField.getValue();
+        
+        if (value && time) {
+            value.setUTCHours(time.getUTCHours());
+            value.setUTCMinutes(time.getUTCMinutes());
+            value.setUTCSeconds(time.getUTCSeconds());
         }
         return value;
     },

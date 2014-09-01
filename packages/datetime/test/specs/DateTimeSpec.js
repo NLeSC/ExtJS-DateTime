@@ -44,13 +44,9 @@ describe('NLeSC.form.field.DateTime', function() {
     });
 
     describe("getValue", function() {
-        beforeEach(function() {
-            instance.getFormat = function() {return 'c';};
-        });
-
         it('Returns null when date and time are not set', function() {
-            instance.dateField = {getSubmitValue: function() {return null;}};
-            instance.timeField = {getSubmitValue: function() {return null;}};
+            instance.dateField = {getValue: function() {return null;}};
+            instance.timeField = {getValue: function() {return null;}};
 
             var value = instance.getValue();
 
@@ -58,15 +54,13 @@ describe('NLeSC.form.field.DateTime', function() {
         });
 
         it('returns datetime when date and time are set', function() {
-            Ext.Date = {parse: function() {}};
-            spyOn(Ext.Date, 'parse').andReturn('1234');
-            instance.dateField = {getSubmitValue: function() {return "2013-08-26";}};
-            instance.timeField = {getSubmitValue: function() {return "12:34:57";}};
+            instance.dateField = {getValue: function() {return new Date('2013-08-26T00:00:00Z');}};
+            instance.timeField = {getValue: function() {return new Date('1997-02-21T12:34:57Z');}};
 
             var value = instance.getValue();
 
-            expect(value).toBe('1234');
-            expect(Ext.Date.parse).toHaveBeenCalledWith('2013-08-26T12:34:57', 'c');
+            var expected = new Date('2013-08-26T12:34:57Z');
+            expect(value.getTime()).toBe(expected.getTime());
         });
     });
 
