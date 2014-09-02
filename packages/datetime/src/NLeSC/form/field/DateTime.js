@@ -19,6 +19,11 @@
  *
  * Derived from [Sencha Forum](http://www.sencha.com/forum/showthread.php?134345-Ext.ux.form.field.DateTime)
  *
+ *
+ * Forces date time to be represented in UTC instead of localized format. 
+ * 
+ * WATCH OUT! This will override functions in Ext.Date and Ext.picker.Time 
+ *
  * Example usage:
  *
  *     @example
@@ -105,20 +110,11 @@ Ext.define('NLeSC.form.field.DateTime', {
      * @type Ext.form.field.Time
      */
     timeField : null,
-    /**
-     * @cfg {Boolean} utcFormat
-     * Forces date time to be represented in UTC instead of localized format. 
-     * 
-     * WATCH OUT! This will override functions in Ext.Date and Ext.picker.Time 
-     */
-    utcFormat: true,
     initComponent : function() {
         var me = this;
         me.items = me.items || [];
         
-        if (this.utcFormat) {
-        	this.forceUtcFormat();
-        }
+    	this.forceUtcFormat();
 
         me.dateField = Ext.create('Ext.form.field.Date', Ext
                 .apply({
@@ -226,15 +222,6 @@ Ext.define('NLeSC.form.field.DateTime', {
         	
         	return date;
         }
-//        Ext.define('NLeSC.form.field.TimeUtc', {
-//        	override: 'Ext.form.field.Time',
-//        	initDate: '1/1/20080',
-//            initDateFormat: 'j/n/YZ'
-//        });
-//        Ext.define('NLeSC.picker.TimeUtc', {
-//        	override: 'Ext.picker.Time',
-//        	normalizeDate: function(date) { return date;}
-//        });
     },
     focus : function() {
         this.callParent();

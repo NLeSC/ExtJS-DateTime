@@ -8,7 +8,9 @@ Ext.Loader.addClassPathMappings({
   "Ext": "../../../../ext/src",
   "Ext.Msg": "../../../../ext/src/window/MessageBox.js",
   "Ext.rtl.EventObjectImpl": "../../../../ext/src/rtl/EventObject.js",
-  "NLeSC": "../../src/NLeSC"
+  "NLeSC": "../../overrides",
+  "NLeSC.form.field.DateTime": "../../src/NLeSC/form/field/DateTime.js",
+  "NLeSC.form.field.DateTimeRange": "../../src/NLeSC/form/field/DateTimeRange.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
   "Ext.ux.BoxReorderer": [],
@@ -74,7 +76,9 @@ Ext.ClassManager.addNameAlternateMappings({
   ],
   "Ext.ux.statusbar.ValidationStatus": [],
   "NLeSC.form.field.DateTime": [],
-  "NLeSC.form.field.DateTimeRange": []
+  "NLeSC.form.field.DateTimeRange": [],
+  "NLeSC.form.field.Time": [],
+  "NLeSC.picker.Time": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.BoxReorderer": [],
@@ -192,5 +196,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "NLeSC.form.field.DateTimeRange": [
     "widget.datetimerange"
-  ]
+  ],
+  "NLeSC.form.field.Time": [],
+  "NLeSC.picker.Time": []
 });
+Ext.Loader.loadScript("../../overrides/form/field/Time.js");
+Ext.Loader.loadScript("../../overrides/picker/Time.js");
