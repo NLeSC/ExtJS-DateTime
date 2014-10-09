@@ -222,6 +222,9 @@ Ext.define('NLeSC.form.field.DateTime', {
         	
         	return date;
         }
+        Ext.JSON.encodeDate = function(d) {
+        	return d.toISOString();
+        }
     },
     focus : function() {
         this.callParent();
