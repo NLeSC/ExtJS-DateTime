@@ -5,7 +5,8 @@ Build
 
 Build requires:
 * SenchaCmd, download from [Sencha](http://www.sencha.com/products/sencha-cmd/download/) and install.
-* karma, for running tests, install with `sudo apt-get install phantomjs nodejs lcov` and `sudo npm install -g karma karma-coverage karma-junit-reporter`.
+* karma, for running tests, install with `sudo apt-get install nodejs lcov` and `sudo npm install -g karma-cli`.
+* karma plugins, `cd packages/datetime/;npm install`.
 * jsduck, for documentation, install with `sudo gem install jsduck`.
 
 Build with `sencha package build` inside `packages/datetime/` folder.
